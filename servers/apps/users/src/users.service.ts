@@ -258,9 +258,9 @@ export class UsersService {
           social_id,
           provider,
           avatar: {
-            connectOrCreate: {
+            update: {
               where: { userId: user.id },
-              create: { url: picture },
+              data: { url: picture },
             },
           },
         },

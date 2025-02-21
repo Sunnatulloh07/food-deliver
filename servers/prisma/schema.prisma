@@ -13,11 +13,11 @@ enum Role {
 }
 
 model Avatar {
-  id        String @id @default(cuid())
-  public_id String ?
+  id        String  @id @default(cuid())
+  public_id String?
   url       String
-  userId    String @unique
-  user      User   @relation(fields: [userId], references: [id])
+  userId    String? @unique
+  user      User?   @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -33,6 +33,61 @@ model User {
   provider     String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Review       Review[]
 
   @@index([email, phone_number])
+}
+
+model Picture {
+  id           String      @id @default(cuid())
+  public_id    String
+  url          String
+  restaurantId String?     @unique
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+}
+
+model Restaurant {
+  id           String   @id @default(cuid())
+  name         String
+  country      String
+  city         String
+  region       String
+  phone_number Float    @unique
+  email        String   @unique
+  password     String
+  is_active    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  picture      Picture?
+  Food         Food[]
+
+  @@index([email, phone_number])
+}
+
+model Food {
+  id             String     @id @default(cuid())
+  name           String     @unique
+  description    String
+  price          Int
+  estimatedPrice Int?
+  category       String
+  images         String[]
+  is_active      Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  restaurant     Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId   String
+  Review         Review[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  text      String
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  foodId    String
+  food      Food     @relation(fields: [foodId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }

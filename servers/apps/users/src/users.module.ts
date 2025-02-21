@@ -9,12 +9,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { UserResolver } from './users.resolver';
-import { EmailModule } from './email/email.module';
-import { BcryptGenerater } from './utils/bcryptGenerater';
 import { PassportModule } from '@nestjs/passport';
-import { SocialAuthController } from './social-auth.controller';
-import { GoogleStrategy } from './strategies/google.strategy';
-import { GithubStrategy } from './strategies/github.strategy';
+import { EmailModule } from '@app/email';
+import { BcryptGenerater, SendToken } from '@app/utils';
+import { Request, Response } from 'express';
 
 @Module({
   imports: [
@@ -27,11 +25,16 @@ import { GithubStrategy } from './strategies/github.strategy';
       autoSchemaFile: {
         federation: 2,
       },
+      playground: true,
+      introspection: true,
+      context: ({ req, res }): { req: Request; res: Response } => ({
+        req,
+        res,
+      }),
     }),
     EmailModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
-  controllers: [SocialAuthController],
   providers: [
     UsersService,
     ConfigService,
@@ -39,8 +42,9 @@ import { GithubStrategy } from './strategies/github.strategy';
     PrismaService,
     UserResolver,
     BcryptGenerater,
-    GoogleStrategy,
-    GithubStrategy,
+    SendToken,
+    JwtService,
+    ConfigService,
   ],
 })
 export class UsersModule {}

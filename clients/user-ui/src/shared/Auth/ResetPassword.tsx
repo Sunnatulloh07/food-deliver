@@ -116,15 +116,6 @@ const ResetPassword = ({ token }: { token: string }) => {
         >
           Submit
         </Button>
-        {/* <h5 className="text-center pt-4 font-Poppins text-[14px]">
-          Or Go Back to
-          <span
-            className="text-[#2190ff] pl-1 cursor-pointer"
-            onClick={() => router.push("/login")}
-          >
-            Login
-          </span>
-        </h5> */}
         <br />
       </form>
     </div>

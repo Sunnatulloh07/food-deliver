@@ -12,8 +12,14 @@ export default function SocialLoginPage() {
     const refreshToken = searchParams.get('refreshToken');
 
     if (accessToken && refreshToken) {
-      Cookies.set('access_token', accessToken as string);
-      Cookies.set('refresh_token', refreshToken as string);
+      Cookies.set('access_token_user', accessToken as string, {
+        secure: true,
+        expires: 1/48
+      });
+      Cookies.set('refresh_token_user', refreshToken as string,{
+        secure: true,
+        expires: 2 
+      });
 
       router.push('/');
     }

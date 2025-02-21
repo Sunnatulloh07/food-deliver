@@ -44,8 +44,6 @@ function Login({ handleAuthType, setOpen }: LoginProps) {
       const { data: loginData } = await loginUserMutation({
         variables: data,
       });
-      Cookies.set("access_token", loginData?.login?.accessToken);
-      Cookies.set("refresh_token", loginData?.login?.refreshToken);
       localStorage.setItem("user", JSON.stringify(loginData?.login?.user));
       reset();
       toast.success("Login successfully!");

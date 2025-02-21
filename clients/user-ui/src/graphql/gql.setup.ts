@@ -4,21 +4,22 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import Cookies from "js-cookie";
 
 const authmiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext({
+  operation.setContext(({ headers = {} }) => ({
     headers: {
-      accesstoken: Cookies.get("access_token"),
-      refreshtoken: Cookies.get("refresh_token"),
+      ...headers,
     },
-  });
+  }));
   return forward(operation);
 });
 
 export const GQLClient = new ApolloClient({
   link: authmiddleware.concat(
-    new HttpLink({ uri: process.env.NEXT_PUBLIC_SERVER_URL })
+    new HttpLink({
+      uri: process.env.NEXT_PUBLIC_SERVER_URL,
+      credentials: "include",
+    })
   ),
   cache: new InMemoryCache(),
 });

@@ -11,8 +11,8 @@ function useUser() {
   useEffect(() => {
     if (data?.getLoggedInUser.user) {
       localStorage.setItem("user", JSON.stringify(data?.getLoggedInUser.user));
-      Cookies.set("access_token", data?.getLoggedInUser.accessToken);
-      Cookies.set("refresh_token", data?.getLoggedInUser.refreshToken);
+      // Cookies.set("access_token_user", data?.getLoggedInUser.accessToken);
+      // Cookies.set("refresh_token_user", data?.getLoggedInUser.refreshToken);
     }
   }, [data]);
 

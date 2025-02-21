@@ -31,8 +31,8 @@ function ProfileDropdown() {
   }, [data, loading]);
 
   const handleLogout = () => {
-    Cookies.remove("access_token");
-    Cookies.remove("refresh_token");
+    Cookies.remove("access_token_user");
+    Cookies.remove("refresh_token_user");
     localStorage.removeItem("user");
     toast.success("Logged out successfully!");
     setSignedIn(false);
@@ -59,7 +59,7 @@ function ProfileDropdown() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href="/signin">Profile</Link>
+              <Link href="/profile">Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/orders">Orders</Link>

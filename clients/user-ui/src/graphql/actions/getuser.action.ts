@@ -14,8 +14,6 @@ export const GET_LOGGED_IN_USER: DocumentNode = gql`
           url
         }
       }
-      accessToken
-      refreshToken
     }
   }
 `;

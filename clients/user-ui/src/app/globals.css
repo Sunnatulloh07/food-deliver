@@ -23,13 +23,13 @@ body {
 /* Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Firefox */
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 @layer base {
@@ -98,11 +98,42 @@ input[type="number"] {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-10px); }
-  40%, 80% { transform: translateX(10px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-10px);
+  }
+  40%,
+  80% {
+    transform: translateX(10px);
+  }
 }
 
 .shake {
   animation: shake 0.5s;
+}
+
+.banner {
+  background-image:  url("https://img.freepik.com/fotos-premium/pasta-espagueti-salsa-tomate-queso-albahaca-servida-bol-horizontal_1220-5633.jpg?w=1060");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.backdrop_shaders {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #180f34 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  flex: none;
+  inset: -273px 290px 51px -557px;
+  overflow: hidden;
+  position: absolute;
+  top: 90px;
+  z-index: -1;
 }
